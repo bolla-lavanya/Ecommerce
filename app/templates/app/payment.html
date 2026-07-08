@@ -1,0 +1,56 @@
+{% extends 'app/base.html' %}
+
+{% block title %}Payment{% endblock title %}
+
+{% block main-content %}
+
+<div class="container my-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-6">
+
+            <div class="card shadow p-4">
+
+                <h3 class="text-center mb-4">
+                    Payment
+                </h3>
+
+                <h5>Total Amount : ₹{{ totalamount }}</h5>
+
+                <hr>
+
+                <form method="post">
+                    {% csrf_token %}
+
+                    <div class="form-check mb-3">
+
+                        <input
+                            class="form-check-input"
+                            type="radio"
+                            name="payment"
+                            value="cod"
+                            checked
+                        >
+
+                        <label class="form-check-label">
+                            Cash on Delivery
+                        </label>
+
+                    </div>
+
+                    <button class="btn btn-success w-100">
+                        Place Order
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

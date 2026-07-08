@@ -1,0 +1,80 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block title %}
+Order Details
+{% endblock title %}
+
+{% block main-content %}
+
+<div class="container my-5">
+
+<div class="row">
+
+<div class="col-md-5">
+
+<img src="{{ order.product.product_image.url }}"
+class="img-fluid border rounded">
+
+</div>
+
+<div class="col-md-7">
+
+<h2>{{ order.product.title }}</h2>
+
+<hr>
+
+<h5>Description</h5>
+
+<p>
+{{ order.product.description }}
+</p>
+
+<h5>Composition</h5>
+
+<p>
+{{ order.product.composition }}
+</p>
+
+<h5>Price</h5>
+
+<p>
+₹ {{ order.product.discounted_price }}
+</p>
+
+<h5>Status</h5>
+
+<p class="text-success">
+{{ order.status }}
+</p>
+
+<br>
+
+<a href="{% url 'buyagain' order.id %}"
+class="btn btn-success">
+
+Buy Again
+
+</a>
+
+<a href="{% url 'deleteorder' order.id %}"
+class="btn btn-danger">
+
+Remove Order
+
+</a>
+
+<a href="{% url 'orders' %}"
+class="btn btn-secondary">
+
+Back
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+{% endblock main-content %}

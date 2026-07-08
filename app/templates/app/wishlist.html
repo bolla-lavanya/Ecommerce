@@ -1,0 +1,98 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block title %}My Wishlist{% endblock title %}
+
+{% block main-content %}
+
+<div class="container my-5">
+
+    <div class="text-center mb-4">
+        <h2 class="fw-bold text-danger">
+            <i class="fas fa-heart"></i> My Wishlist
+        </h2>
+        <p class="text-muted">Save your favorite products here.</p>
+    </div>
+
+    {% if wishlist %}
+
+    <div class="row">
+
+        {% for item in wishlist %}
+
+        <div class="col-md-6 col-lg-4 mb-4">
+
+            <div class="card shadow-lg border-0 rounded-4 h-100">
+
+                <img src="{{ item.product.product_image.url }}"
+                     class="card-img-top p-3"
+                     style="height:250px; object-fit:contain;">
+
+                <div class="card-body text-center">
+
+                    <h5 class="fw-bold">
+                        {{ item.product.title }}
+                    </h5>
+
+                    <h4 class="text-success">
+                        ₹{{ item.product.discounted_price }}
+                    </h4>
+
+                    <small class="text-muted">
+                        <del>₹{{ item.product.selling_price }}</del>
+                    </small>
+
+                    <div class="mt-4">
+
+                        <a href="{% url 'product_detail' item.product.id %}"
+                           class="btn btn-warning w-100 mb-2">
+                            View Product
+                        </a>
+
+                        <a href="/removewishlist/?prod_id={{item.product.id}}"
+                           class="btn btn-danger w-100"
+                           onclick="return confirm('Remove this item from wishlist?')">
+                            <i class="fas fa-trash"></i>
+                            Remove
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% else %}
+
+    <div class="text-center mt-5">
+
+        <img src="{% static 'app/images/empty_wishlist.png' %}"
+             width="220"
+             class="mb-3">
+
+        <h3 class="text-danger">
+            ❤️ Wishlist is Empty
+        </h3>
+
+        <p class="text-muted fs-5">
+            You have removed all wishlist items.
+        </p>
+
+        <a href="{% url 'home' %}"
+           class="btn btn-success btn-lg px-4">
+            Continue Shopping
+        </a>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock main-content %}
